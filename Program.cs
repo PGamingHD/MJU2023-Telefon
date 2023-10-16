@@ -27,20 +27,20 @@ namespace AddressList
             do
             {
                 Console.Write("Command: ");
-                command = Console.ReadLine();
-                if (command.ToLower() == "help") {
+                command = Console.ReadLine().ToLower();
+                if (command == "help") {
                     Console.WriteLine("Not implemented yet");
                 }
-                else if (command.ToLower() == "stop") {
+                else if (command == "stop") {
                     
                 }
-                else if (command.ToLower() == "load") {
+                else if (command == "load") {
 
                 }
                 else {
                     Console.WriteLine($"Unknown Command: {command}");
                 }
-            } while (command.ToLower() != "stop");
+            } while (command != "stop");
             Console.WriteLine("Bye!");
         }
     }
