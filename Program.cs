@@ -18,12 +18,30 @@ namespace AddressList
         {
             Console.WriteLine($"{name} {phone} {adress}");
         }
-    }
 
+        public string returnPrint()
+        {
+            return $"{name},{phone},{adress}";
+        }
+    }
+            // C:/Users/hugge/OneDrive/Mjukvaruutveckling/Kod/upg/Uppgifter/Adresslista/adresser.txt
     internal class Program
     {
         readonly static List<Person> adressList = new List<Person>();
 
+        public static void SaveAdressList()
+        {
+            List<string> lines = new List<string>();
+            foreach (Person person in adressList)
+            {
+                string line = person.returnPrint();
+                lines.Add(line);
+            }
+
+            string filePath = "C:/Users/pontu/Documents/adresser.txt";
+            File.WriteAllLines(filePath, lines);
+            Console.WriteLine("Adressfilen har sparats!");
+        }
         static void Main()
         {
             Console.WriteLine("Hello and welcome to the Addresslist!");
@@ -70,6 +88,10 @@ namespace AddressList
                     string? addAdress = Console.ReadLine();
 
                     adressList.Add(new Person(addName, addPhone, addAdress));
+                }
+                else if(command == "save")
+                {
+                    SaveAdressList();
                 }
                 else
                 {
