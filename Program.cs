@@ -17,6 +17,9 @@ namespace AddressList
                 else if (command.ToLower() == "stop") {
                     
                 }
+                else if (command.ToLower() == "load") {
+
+                }
                 else {
                     Console.WriteLine($"Unknown Command: {command}");
                 }
