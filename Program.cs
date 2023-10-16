@@ -2,6 +2,17 @@ namespace AddressList
 {
     internal class Program
     {
+        internal class Person
+{
+    public string name;
+    public string phone;
+    public string adress;
+
+    static string Print()
+    { 
+        Console.WriteLine($"{name} {phone} {adress}"); 
+    }
+}
         static void Main(string[] args)
         {
             Console.WriteLine("Hello and welcome to the Addresslist!");
