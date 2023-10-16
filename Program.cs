@@ -1,25 +1,30 @@
 namespace AddressList
 {
-    internal class Program
+
+    internal class Person
     {
-        internal class Person
+        private string name { get; set; }
+        private string phone { get; set; }
+        private string adress { get; set; }
+
+        public Person(string Name, string Phone, string Address)
         {
-            static private string name, phone, adress;
-
-            public Person(string Name, string Person, string Address)
-            {
-                name = Name; 
-                phone = Person; 
-                adress = Address;
-            }
-
-            static void Print()
-            {
-                Console.WriteLine($"{name} {phone} {adress}");
-            }
+            name = Name;
+            phone = Phone;
+            adress = Address;
         }
 
-        static void Main(string[] args)
+        public void Print()
+        {
+            Console.WriteLine($"{name} {phone} {adress}");
+        }
+    }
+
+    internal class Program
+    {
+        readonly static List<Person> adressList = new List<Person>();
+
+        static void Main()
         {
             Console.WriteLine("Hello and welcome to the Addresslist!");
             Console.WriteLine("Write 'help' for help!");
@@ -28,16 +33,35 @@ namespace AddressList
             {
                 Console.Write("Command: ");
                 command = Console.ReadLine().ToLower();
-                if (command == "help") {
+
+                if (command == "help")
+                {
                     Console.WriteLine("Not implemented yet");
                 }
-                else if (command == "stop") {
-                    
-                }
-                else if (command == "load") {
+                else if (command == "stop")
+                {
 
                 }
-                else {
+                else if (command == "load")
+                {
+                    string[] databaseFile = File.ReadAllLines("C:/Users/pontu/Documents/adresser.txt");
+
+                    foreach (string line in databaseFile)
+                    {
+                        string[] arguments = line.Split(",");
+
+                        adressList.Add(new Person(arguments[0], arguments[1], arguments[2]));
+                    }
+                }
+                else if (command == "list")
+                {
+                    foreach (Person person in adressList)
+                    {
+                        person.Print();
+                    }
+                }
+                else
+                {
                     Console.WriteLine($"Unknown Command: {command}");
                 }
             } while (command != "stop");
