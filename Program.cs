@@ -4,27 +4,27 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hej och välkommen till adresslistan.");
-            Console.WriteLine("Skriv 'hjälp' för hjälp!");
+            Console.WriteLine("Hello and welcome to the Addresslist!");
+            Console.WriteLine("Write 'help' for help!");
             string command;
             do
             {
-                Console.Write("Kommando: ");
+                Console.Write("Command: ");
                 command = Console.ReadLine();
-                if (command == "hjälp")
+                if (command == "help")
                 {
-                    Console.WriteLine($"Tyvärr ej implementerat!");
+                    Console.WriteLine("Not implemented yet");
                 }
-                else if(command == "sluta")
+                else if(command == "stop")
                 {
-
+                    Environment.Exit(0);
                 }
                 else
                 {
-                    Console.WriteLine($"Okänt kommando: {command}");
+                    Console.WriteLine($"Unknown Command: {command}");
                 }
-            } while (command != "sluta");
-            Console.WriteLine("Hej då!");
+            } while (command != "stop");
+            Console.WriteLine("Bye!");
         }
     }
 }
