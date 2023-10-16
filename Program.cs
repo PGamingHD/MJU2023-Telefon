@@ -60,6 +60,17 @@ namespace AddressList
                         person.Print();
                     }
                 }
+                else if (command == "add")
+                {
+                    Console.WriteLine("Lägg till ett namn: ");
+                    string? addName = Console.ReadLine();
+                    Console.WriteLine("Lägg till ett telefonnummer: ");
+                    string? addPhone = Console.ReadLine();
+                    Console.WriteLine("Lägg till en adress: ");
+                    string? addAdress = Console.ReadLine();
+
+                    adressList.Add(new Person(addName, addPhone, addAdress));
+                }
                 else
                 {
                     Console.WriteLine($"Unknown Command: {command}");
