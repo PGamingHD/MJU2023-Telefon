@@ -1,4 +1,4 @@
-﻿namespace AddressList
+namespace AddressList
 {
     internal class Program
     {
@@ -11,19 +11,16 @@
             {
                 Console.Write("Command: ");
                 command = Console.ReadLine();
-                if (command == "help")
-                {
+                if (command.ToLower() == "help") {
                     Console.WriteLine("Not implemented yet");
                 }
-                else if(command == "stop")
-                {
-                    Environment.Exit(0);
+                else if (command.ToLower() == "stop") {
+                    
                 }
-                else
-                {
+                else {
                     Console.WriteLine($"Unknown Command: {command}");
                 }
-            } while (command != "stop");
+            } while (command.ToLower() != "stop");
             Console.WriteLine("Bye!");
         }
     }
