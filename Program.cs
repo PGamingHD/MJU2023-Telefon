@@ -3,16 +3,22 @@ namespace AddressList
     internal class Program
     {
         internal class Person
-{
-    public string name;
-    public string phone;
-    public string adress;
+        {
+            static private string name, phone, adress;
 
-    static string Print()
-    { 
-        Console.WriteLine($"{name} {phone} {adress}"); 
-    }
-}
+            public Person(string Name, string Person, string Address)
+            {
+                name = Name; 
+                phone = Person; 
+                adress = Address;
+            }
+
+            static void Print()
+            {
+                Console.WriteLine($"{name} {phone} {adress}");
+            }
+        }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello and welcome to the Addresslist!");
