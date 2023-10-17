@@ -58,13 +58,14 @@ namespace AddressList
             if (newAdressPath == null) return;
 
             File.WriteAllLines(newAdressPath, lines);
-            Console.WriteLine("Adressfilen har sparats!");
+            Console.WriteLine("The address file has been saved!");
         }
         static void Main()
         {
             string? adressPath = Environment.GetEnvironmentVariable("adressListPath");
 
-            if (adressPath == null) {
+            if (adressPath == null)
+            {
                 string username = Environment.UserName;
                 Environment.SetEnvironmentVariable("adressListPath", $"C:/Users/{username}/Documents/adresser.txt");
             }
@@ -94,7 +95,8 @@ namespace AddressList
 
                     if (newAdressPath == null) continue;
 
-                    if(!File.Exists(newAdressPath)) {
+                    if (!File.Exists(newAdressPath))
+                    {
                         string[] templateData = { "Arne Svensson,013-113 13 13,Datasvängen 23", "Berith Qvist,014-114 14 14,Telegränd 45", "Caesar Augustus,091-432 87 65,Optikervägen 10", "Dagobert Uggla,047-56 64 72,Cobolgränd 77", "Eleanor Smith,017-116 15 22,Algolgatan 60" };
 
                         File.WriteAllLines(newAdressPath, templateData);
@@ -118,11 +120,11 @@ namespace AddressList
                 }
                 else if (command == "add")
                 {
-                    Console.WriteLine("Lägg till ett namn: ");
+                    Console.WriteLine("Add name: ");
                     string? addName = Console.ReadLine();
-                    Console.WriteLine("Lägg till ett telefonnummer: ");
+                    Console.WriteLine("Add phonenumber: ");
                     string? addPhone = Console.ReadLine();
-                    Console.WriteLine("Lägg till en adress: ");
+                    Console.WriteLine("Add adress: ");
                     string? addAdress = Console.ReadLine();
 
                     adressList.Add(new Person(addName, addPhone, addAdress));
@@ -133,14 +135,14 @@ namespace AddressList
                 }
                 else if (command == "delete")
                 {
-                    Console.WriteLine("Skriv namnet på personen du vill ta bort: ");
+                    Console.WriteLine("Type the persons name you want to remove: ");
                     string? deleteName = Console.ReadLine();
 
                     List<Person> foundName = adressList.Where(p => p.getName().ToLower() == deleteName.ToLower()).ToList();
 
                     if (foundName.Count() == 0)
                     {
-                        Console.WriteLine("Ingen kunde hittas med det namnet!");
+                        Console.WriteLine("Nobody found with that name!");
                         continue;
                     }
 
@@ -148,20 +150,20 @@ namespace AddressList
                     {
                         Person foundPerson = foundName[0];
 
-                        Console.WriteLine("Personen har tagits bort från listan!");
+                        Console.WriteLine("The person has been removed!");
                         adressList.Remove(foundPerson);
                         continue;
                     }
 
-                    Console.WriteLine("Flera personer hittades, vänligen fortsätt med sökandet!");
-                    Console.WriteLine("Skriv numret på personen du vill ta bort: ");
+                    Console.WriteLine("Multiple people found, add more information about the person you want to remove!");
+                    Console.WriteLine("Type the number of that person you want to remove: ");
                     string? deletePhone = Console.ReadLine();
 
                     List<Person> foundPhone = foundName.Where(p => p.getPhone() == deletePhone).ToList();
 
                     if (foundPhone.Count() == 0)
                     {
-                        Console.WriteLine("Ingen kunde hittas med det numret!");
+                        Console.WriteLine("Nobody found with that number!");
                         continue;
                     }
 
@@ -169,20 +171,20 @@ namespace AddressList
                     {
                         Person foundPerson = foundPhone[0];
 
-                        Console.WriteLine("Personen har tagits bort från listan!");
+                        Console.WriteLine("The person has been removed!");
                         adressList.Remove(foundPerson);
                         continue;
                     }
 
-                    Console.WriteLine("Flera personer hittades, vänligen fortsätt med sökandet!");
-                    Console.WriteLine("Skriv adressen på personen du vill ta bort: ");
+                    Console.WriteLine("Multiple people found, add more information about the person you want to remove!");
+                    Console.WriteLine("Type the adress of the person you want to remove: ");
                     string? deleteAdress = Console.ReadLine();
 
                     List<Person> foundAdress = foundPhone.Where(p => p.getAdress().ToLower() == deleteAdress.ToLower()).ToList();
 
                     if (foundAdress.Count() == 0)
                     {
-                        Console.WriteLine("Ingen kunde hittas med den adressen!");
+                        Console.WriteLine("Nobody found with that adress!");
                         continue;
                     }
 
@@ -190,7 +192,7 @@ namespace AddressList
                     {
                         Person foundPerson = foundAdress[0];
 
-                        Console.WriteLine("Personen har tagits bort från listan!");
+                        Console.WriteLine("The person has been removed!");
                         adressList.Remove(foundPerson);
                         continue;
                     }
@@ -199,7 +201,7 @@ namespace AddressList
                     {
                         Person foundPerson = foundAdress[0];
 
-                        Console.WriteLine("Första personen har tagits bort eftersom det finns flera på listan!");
+                        Console.WriteLine("The first person in the list has been removed, since there are multiple on the list!");
                         adressList.Remove(foundPerson);
                         continue;
                     }
