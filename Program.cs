@@ -65,8 +65,6 @@ namespace AddressList
         {
             string? adressPath = Environment.GetEnvironmentVariable("adressListPath");
 
-            Console.WriteLine(adressPath);
-
             if (adressPath == null) {
                 string username = Environment.UserName;
                 Environment.SetEnvironmentVariable("adressListPath", $"C:/Users/{username}/Documents/adresser.txt");
@@ -96,6 +94,12 @@ namespace AddressList
                     string? newAdressPath = Environment.GetEnvironmentVariable("adressListPath");
 
                     if (newAdressPath == null) continue;
+
+                    if(!File.Exists(newAdressPath)) {
+                        string[] templateData = { "Arne Svensson,013-113 13 13,Datasvängen 23", "Berith Qvist,014-114 14 14,Telegränd 45", "Caesar Augustus,091-432 87 65,Optikervägen 10", "Dagobert Uggla,047-56 64 72,Cobolgränd 77", "Eleanor Smith,017-116 15 22,Algolgatan 60" };
+
+                        File.WriteAllLines(newAdressPath, templateData);
+                    }
 
                     string[] databaseFile = File.ReadAllLines(newAdressPath);
 
