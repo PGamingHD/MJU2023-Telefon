@@ -23,6 +23,21 @@ namespace AddressList
         {
             return $"{name},{phone},{adress}";
         }
+
+        public string getName()
+        {
+            return name;
+        }
+
+        public string getPhone()
+        {
+            return phone;
+        }
+
+        public string getAdress()
+        {
+            return adress;
+        }
     }
             // C:/Users/hugge/OneDrive/Mjukvaruutveckling/Kod/upg/Uppgifter/Adresslista/adresser.txt
     internal class Program
@@ -54,7 +69,7 @@ namespace AddressList
 
                 if (command == "help")
                 {
-                    Console.WriteLine("Not implemented yet");
+                    Console.WriteLine("stop -| Stop the running command line!\nload -| Load in all data from the database file\nlist -| List up all data in the database file\nadd -| Add new data to the database file\nsave -| Save all data to the database file");
                 }
                 else if (command == "stop")
                 {
@@ -62,6 +77,7 @@ namespace AddressList
                 }
                 else if (command == "load")
                 {
+                    adressList.Clear();
                     string[] databaseFile = File.ReadAllLines("C:/Users/pontu/Documents/adresser.txt");
 
                     foreach (string line in databaseFile)
@@ -89,16 +105,89 @@ namespace AddressList
 
                     adressList.Add(new Person(addName, addPhone, addAdress));
                 }
-                else if(command == "save")
+                else if (command == "save")
                 {
                     SaveAdressList();
+                }
+                else if (command == "delete")
+                {
+                    Console.WriteLine("Skriv namnet på personen du vill ta bort: ");
+                    string? deleteName = Console.ReadLine();
+
+                    List<Person> foundName = adressList.Where(p => p.getName().ToLower() == deleteName.ToLower()).ToList();
+
+                    if (foundName.Count() == 0)
+                    {
+                        Console.WriteLine("Ingen kunde hittas med det namnet!");
+                        continue;
+                    }
+
+                    if (foundName.Count() == 1)
+                    {
+                        Person foundPerson = foundName[0];
+
+                        Console.WriteLine("Personen har tagits bort från listan!");
+                        adressList.Remove(foundPerson);
+                        continue;
+                    }
+
+                    Console.WriteLine("Flera personer hittades, vänligen fortsätt med sökandet!");
+                    Console.WriteLine("Skriv numret på personen du vill ta bort: ");
+                    string? deletePhone = Console.ReadLine();
+
+                    List<Person> foundPhone = foundName.Where(p => p.getPhone() == deletePhone).ToList();
+
+                    if (foundPhone.Count() == 0)
+                    {
+                        Console.WriteLine("Ingen kunde hittas med det numret!");
+                        continue;
+                    }
+
+                    if (foundPhone.Count() == 1)
+                    {
+                        Person foundPerson = foundPhone[0];
+
+                        Console.WriteLine("Personen har tagits bort från listan!");
+                        adressList.Remove(foundPerson);
+                        continue;
+                    }
+
+                    Console.WriteLine("Flera personer hittades, vänligen fortsätt med sökandet!");
+                    Console.WriteLine("Skriv adressen på personen du vill ta bort: ");
+                    string? deleteAdress = Console.ReadLine();
+
+                    List<Person> foundAdress = foundPhone.Where(p => p.getAdress().ToLower() == deleteAdress.ToLower()).ToList();
+
+                    if (foundAdress.Count() == 0)
+                    {
+                        Console.WriteLine("Ingen kunde hittas med den adressen!");
+                        continue;
+                    }
+
+                    if (foundAdress.Count() == 1)
+                    {
+                        Person foundPerson = foundAdress[0];
+
+                        Console.WriteLine("Personen har tagits bort från listan!");
+                        adressList.Remove(foundPerson);
+                        continue;
+                    }
+
+                    if (foundAdress.Count() >= 2)
+                    {
+                        Person foundPerson = foundAdress[0];
+
+                        Console.WriteLine("Första personen har tagits bort eftersom det finns flera på listan!");
+                        adressList.Remove(foundPerson);
+                        continue;
+                    }
                 }
                 else
                 {
                     Console.WriteLine($"Unknown Command: {command}");
                 }
             } while (command != "stop");
-            Console.WriteLine("Bye!");
+            Console.WriteLine("Process exit, bye!");
         }
     }
 }
