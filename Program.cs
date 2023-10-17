@@ -57,7 +57,6 @@ namespace AddressList
 
             if (newAdressPath == null) return;
 
-            string filePath = "C:/Users/pontu/Documents/adresser.txt";
             File.WriteAllLines(newAdressPath, lines);
             Console.WriteLine("Adressfilen har sparats!");
         }
