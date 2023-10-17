@@ -53,12 +53,26 @@ namespace AddressList
                 lines.Add(line);
             }
 
+            string? newAdressPath = Environment.GetEnvironmentVariable("adressListPath");
+
+            if (newAdressPath == null) return;
+
             string filePath = "C:/Users/pontu/Documents/adresser.txt";
-            File.WriteAllLines(filePath, lines);
+            File.WriteAllLines(newAdressPath, lines);
             Console.WriteLine("Adressfilen har sparats!");
         }
         static void Main()
         {
+            string? adressPath = Environment.GetEnvironmentVariable("adressListPath");
+
+            Console.WriteLine(adressPath);
+
+            if (adressPath == null) {
+                string username = Environment.UserName;
+                Environment.SetEnvironmentVariable("adressListPath", $"C:/Users/{username}/Documents/adresser.txt");
+            }
+
+
             Console.WriteLine("Hello and welcome to the Addresslist!");
             Console.WriteLine("Write 'help' for help!");
             string command;
@@ -78,7 +92,12 @@ namespace AddressList
                 else if (command == "load")
                 {
                     adressList.Clear();
-                    string[] databaseFile = File.ReadAllLines("C:/Users/pontu/Documents/adresser.txt");
+
+                    string? newAdressPath = Environment.GetEnvironmentVariable("adressListPath");
+
+                    if (newAdressPath == null) continue;
+
+                    string[] databaseFile = File.ReadAllLines(newAdressPath);
 
                     foreach (string line in databaseFile)
                     {
