@@ -69,7 +69,7 @@ namespace AddressList
 
                 if (command == "help")
                 {
-                    Console.WriteLine("stop -| Stop the running command line!\nload -| Load in all data from the database file\nlist -| List up all data in the database file\nadd -| Add new data to the database file\nsave -| Save all data to the database file");
+                    Console.WriteLine("stop -| Stop the running command line!\nload -| Load in all data from the database file\nlist -| List up all data in the database file\nadd  -| Add new data to the database file\nsave -| Save all data to the database file");
                 }
                 else if (command == "stop")
                 {
