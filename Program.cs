@@ -39,7 +39,7 @@ namespace AddressList
             return adress;
         }
     }
-            // C:/Users/hugge/OneDrive/Mjukvaruutveckling/Kod/upg/Uppgifter/Adresslista/adresser.txt
+
     internal class Program
     {
         readonly static List<Person> adressList = new List<Person>();
